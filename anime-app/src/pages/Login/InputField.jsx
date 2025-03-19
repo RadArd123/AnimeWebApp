@@ -8,7 +8,7 @@ const InputField = ({ type, name, placeholder, value, onChange, icon }) => {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="w-full pl-10 pr-4 py-2 rounded-lg  focus:outline-none focus:ring-2 focus:ring-[#9a74bd]"
+          className="w-full pl-10 pr-4 py-2 rounded-lg font-extrabold focus:outline-none focus:ring-2 focus:ring-[#9a74bd] bg-[#3a3838b0] text-white"
         />
       </div>
     );

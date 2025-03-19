@@ -8,7 +8,7 @@ function TileCards({ animeName, img, index}) {
         <p className="font-semibold text-white text-[20px] rotate-[270deg] whitespace-nowrap overflow-hidden text-ellipsis h-auto w-[250px] ">
           {animeName}
         </p>
-        <span className="text-green-600 w-full font-extrabold text-[20px] items-center flex justify-center">{index+1}</span>
+        <span className="text-[#3a57ea] w-full font-extrabold text-[20px] items-center flex justify-center">{index+1}</span>
       </div>
       <img className="rounded ml-3" src={img} alt={`${animeName} cover`} />
     </div>

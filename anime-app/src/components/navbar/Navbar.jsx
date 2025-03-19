@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaGithub } from "react-icons/fa";
 import { MdAnchor } from "react-icons/md";
-import { useGlobalContext } from '../context/useGlobal';
 import { Link, useNavigate } from 'react-router-dom';
 import {FaUserCircle } from "react-icons/fa";
-
+import { useAnimeStore } from "../context/useGlobal.js";
 
 function Navbar() {
-    const { watchlist, favorites, removeFromWatchlist, removeFromFavorites } = useGlobalContext();
+    const {fetchAdmin, isAdmin} = useAnimeStore();
     const [showFavorites, setShowFavorites] = useState(false);
     const [showWatchlist, setShowWatchlist] = useState(false);
     const [showUserInfo, setShowLoginInfo] = useState(false);
     const token = localStorage.getItem("token");
+ 
+ 
     const navigate = useNavigate();
 
     const toggleFavorites = () => {
@@ -30,8 +31,15 @@ function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        useAnimeStore.setState({ isAdmin: false });
         navigate("/login");
     }
+
+    useEffect(()=>{  
+            fetchAdmin();
+        },[]);
+       
+    
 
     return (
         <nav className="w-full flex justify-between items-center py-4 px-4 sm:py-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 fixed z-50 bg-gradient-to-b from-[#090909] via-transparent to-[#00000000]">
@@ -88,17 +96,20 @@ function Navbar() {
                     </button>
                 </a>
                 <button onClick={toggleShowInfo} className="hover:bg-gray-700 mt-[-4px] p-2">
-                    <FaUserCircle  className="text-3xl text-white" />
+                    <FaUserCircle  className="text-2xl sm:text-3xl text-white" />
                 </button>
                 {showUserInfo && (
                         <div className="flex flex-col absolute right-32 top-[60px] bg-gray-700 text-white  rounded  w-[200px] ">
                                 <a className="text-white font-extrabold hover:bg-gray-500 p-3">Manage Acount</a>
                                {token?(
-                                <Link to={`/login`}onClick = {handleLogout} className="text-white font-extrabold  hover:bg-gray-500 p-3">Sign-Out</Link>
+                                <Link to={`/login`} onClick = {()=>handleLogout()} className="text-white font-extrabold  hover:bg-gray-500 p-3">Sign-Out</Link>
                                 ):(
-                                <Link to={`/login`} className="text-white font-extrabold  hover:bg-gray-500 p-3">Create Account</Link>
+                                <Link to={`/login`} className="text-white font-extrabold  hover:bg-gray-500 p-3">Login</Link>
                                 )}
                         </div>
+                )}
+                {isAdmin &&(
+                    <Link to={`/adminDashboard`} className="text-white font-extrabold text-md sm:text-xl">Admin</Link>
                 )}
              </div>
         </nav>

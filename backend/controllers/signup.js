@@ -7,8 +7,17 @@ async function createUser(req, res){
         res.status(201).json({user: user, message: "User created successfully"});
     }catch(error){
         console.log(error);
-        res.status(500).json({message: error.message});
+        
+        if(error.message.includes("already exists")){
+            res.status(409).json({message: error.message});
+        } else if (error.message.includes("validation failed")){
+            res.status(400).json({message: error.message});
+        }else if (error.message.includes("Password")){
+            res.status(400).json({message: error.message});
+        }else {
+            res.status(500).json("Internal server error");
+        }
     }
-}
+}   
 
 module.exports = {createUser};

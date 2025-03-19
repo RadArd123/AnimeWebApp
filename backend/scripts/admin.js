@@ -7,9 +7,8 @@ async function createAdminAccount(){
        if(!existingAdmin){
         const newAdmin = new User({
             email: "admin@test.com",
-            firstName: "admin",
-            lastName: "admin",
-            password: await bcrypt.hash("admin", 10),
+            username: "admin",
+            password: await bcrypt.hash("admin15.92", 10),
             role: "admin",
         });
           await newAdmin.save();

@@ -1,6 +1,8 @@
 const  mongoose =  require('mongoose');
-
-mongoose.connect("mongodb+srv://radu:radudb@cluster0.0cjib.mongodb.net/");
+const dotenv = require('dotenv');
+dotenv.config();
+const MONGO_URI = process.env.MONGO_URI;
+mongoose.connect(MONGO_URI);
 
 mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB');

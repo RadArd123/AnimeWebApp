@@ -34,11 +34,12 @@ body {
 
 .scrollable1::-webkit-scrollbar {
  scrollbar-width: thin; /* Thin scrollbar */
- height: 7px; /* Width of the entire scrollbar */
+ height: 7px; 
+ 
 }
 
 .scrollable1::-webkit-scrollbar-thumb {
- background-color: green; /* Green scrollbar thumb */
+ background-color: #3a57ea; /* Green scrollbar thumb */
  border-radius: 2px; /* Slimmer corners */
 }
 
